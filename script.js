@@ -55,11 +55,56 @@ async function getWeather(city) {
 
 const cityName = city.toLowerCase().trim();
 
-if (cityName === "los angeles") {
+if (cityName === "los angeles" || cityName === "la") {
     return `🎵 Easter Egg
 
-California Dreamin'
-The Mamas & The Papas`;
+📍 Los Angeles
+
+🌴 California Dreamin'
+
+🎶 The Mamas & The Papas`;
+}
+
+if (cityName === "gotham") {
+    return `🦇 Easter Egg
+
+Batman odmówił udostępnienia prognozy pogody.
+
+🌙 Będzie mrocznie.`;
+}
+
+if (cityName === "mordor") {
+    return `🔥 Easter Egg
+
+📍 Mordor
+
+🌡 Temperatura: 126°C
+
+👁 Zalecamy nie zakładać Pierścienia.`;
+}
+
+if (cityName === "winterfell") {
+    return `❄️ Easter Egg
+
+Winter is Coming.
+
+🧥 Załóż wszystko co masz.`;
+}
+
+if (cityName === "tatooine") {
+    return `🌞 Easter Egg
+
+Dwa słońca.
+
+🕶 SPF 500 obowiązkowy.`;
+}
+
+if (cityName === "arrakis") {
+    return `🏜 Easter Egg
+
+Uwaga na czerwie pustyni.
+
+💧 Oszczędzaj wodę.`;
 }
 
 
@@ -78,6 +123,7 @@ The Mamas & The Papas`;
         const temperature = Math.round(data.main.temp);
 
         const description = data.weather[0].description;
+        const timezone = data.timezone;
 
         const weatherMain = data.weather[0].main.toLowerCase();
 
@@ -90,9 +136,18 @@ The Mamas & The Papas`;
         if (weatherMain === "snow") {
             recommendation += "\n❄️ Załóż wodoodporne buty.";
         }
+        
+const localTime = new Date(Date.now() + (timezone * 1000));
 
-        return `
+const hours = String(localTime.getUTCHours()).padStart(2, "0");
+const minutes = String(localTime.getUTCMinutes()).padStart(2, "0");
+
+const currentTime = `${hours}:${minutes}`;
+
+return `
 📍 ${data.name}
+
+🕒 Godzina: ${currentTime}
 
 🌡 Temperatura: ${temperature}°C
 
@@ -134,5 +189,15 @@ function getClothingAdvice(temp) {
 }
 
 
-//odpowiedzi i ikonki zostały wygenerwane przez chatGPT, a następnie przetłumaczone na język polski.
-//sam skrypt został napisany zgodnie z dokumentacją i poradnikami. AI pełniło rolę redakcyjną ( i chwała mu za to)
+/*
+Projekt został wykonany samodzielnie.
+
+W trakcie tworzenia korzystano z pomocy ChatGPT jako narzędzia wspomagającego
+tworzenie kodu, dokumentacji oraz generowanie części komunikatów tekstowych.
+
+Implementacja aplikacji, integracja z API OpenWeather oraz logika działania
+zostały przygotowane i dostosowane samodzielnie na podstawie dokumentacji API
+oraz materiałów edukacyjnych.
+
+Dodane Easter Eggi mają charakter humorystyczny i służą uatrakcyjnieniu działania aplikacji.
+*/
